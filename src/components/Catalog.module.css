@@ -1,37 +1,53 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .catalog {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   gap: 20px;
   justify-content: center;
+  width: 360px;
+  margin-bottom: 20px;
 }
 
-.catalog button {
+.catalog-button {
   background: #272a33;
   border-radius: 8px;
   color: #ffffff;
   border: none;
 }
 
-.catalog button:hover {
+.catalog-button:hover {
   background: #ee753e;
 }
 
-.catalog button:disabled {
+.catalog-button:disabled {
   background: #272a33;
   opacity: 0.2;
   cursor: not-allowed;
 }
 
+.catalog-more {
+  width: 223px;
+}
+
 .header {
   margin-top: 50px;
+  margin-bottom: 20px;
   font-family: Roboto;
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
   line-height: 120%;
   text-transform: uppercase;
+  text-align: left;
   color: #272a33;
+  width: inherit;
 }
 
 .good {
@@ -68,11 +84,6 @@
   z-index: 2;
 }
 
-.photo img {
-  position: absolute;
-  height: 200.91px;
-}
-
 .description {
   font-family: "Open Sans";
   font-style: normal;
@@ -106,7 +117,98 @@
   color: #272a33;
 }
 
-.more {
+.good-more {
   margin: 0 10px 10px;
   position: relative;
+  outline: none;
+}
+
+.good-more:focus{
+  outline: none;
+}
+
+.only-PC {
+  display: none;
+}
+
+.only-mobile {
+  display: flex;
+}
+
+@media (min-width: 768px) {
+  .header {
+    margin-bottom: 30px;
+  }
+
+  .catalog {
+    flex-direction: column;
+    width: fit-content;
+    gap: 30px;
+    margin-bottom: 30px;
+  }
+
+  .photo {
+    width: 220px;
+    height: 220px;
+  }
+
+  .good {
+    flex-direction: row;
+    width: 576px;
+  }
+
+  .info {
+    height: 158px;
+    display: flex;
+    flex-direction: column;
+    margin: 31px 0 31px 30px;
+  }
+
+  .description {
+    font-family: "Roboto";
+    font-size: 18px;
+    line-height: 120%;
+  }
+
+  .good-more {
+    width: 159px;
+    margin-bottom: 0;
+  }
+
+  .only-PC {
+    display: flex;
+  }
+
+  .only-mobile {
+    display: none;
+  }
+}
+
+@media (min-width: 1160px) {
+  .good {
+    width: 768px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .catalog {
+    flex-direction: row;
+    width: 1160px;
+  }
+  .header {
+    width: 1160px;
+  }
+  .good {
+    width: 565px;
+  }
+}
+
+@media (min-width: 1920px) {
+  .good {
+    width: 705px;
+  }
+
+  .catalog, .header {
+    width: 1440px;
+  }
 }

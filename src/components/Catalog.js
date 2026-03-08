@@ -7,51 +7,134 @@ import absent from "../assets/absent.png";
 import present from "../assets/present.png"
 import styles from './Catalog.module.css';
 
-const GOODS_PC = [
-    {id: 0, src: cabel1, name: "тросс 1", description: "Стальной канат для лифта GRS 9X21F(9Х17)-IWRC 1570", present: true, length: 50},
-    {id: 1, src: belt12, name: "ремень 12", description: "Плоский тяговый ремень для лифта GRS AAA717X1 (12 кордов)", present: false, length: 0},
-    {id: 2, src: cabel6, name: "тросс 6", description: "Стальной канат для лифта GRS 8X19S-NFC 1570", present: true, length: 50},
-    {id: 3, src: cabel1, name: "тросс 1", description: "Стальной канат для лифта GRS 9X21F(9Х17)-IWRC 1570", present: true, length: 50},
-    {id: 4, src: cabel4, name: "тросс 4", description: "Стальной канат для лифта GRS 8X19W-CWC 1570", present: true, length: 50},
-    {id: 5, src: belt8, name: "ремень 8", description: "Купить плоский тяговый ремень для лифта GRS AAA717AJ1(8 кордов)", present: true, length: 50}
+const GOODS = [
+    {
+        id: 0,
+        src: cabel1,
+        name: "тросс 1",
+        description: "Стальной канат для лифта GRS 9X21F(9Х17)-IWRC 1570",
+        present: true,
+        length: 50,
+        imageHeight: {
+            PC: 260,
+            mobile: 200.90908813476562
+        }
+    },
+    {
+        id: 1,
+        src: belt12,
+        name: "ремень 12",
+        description: "Плоский тяговый ремень для лифта GRS AAA717X1 (12 кордов)",
+        present: false,
+        length: 0,
+        imageHeight: {
+            PC: 251
+        }
+    },
+    {
+        id: 2,
+        src: belt12,
+        name: "ремень 12",
+        description: "Плоский тяговый ремень для лифта GRS AAA717X1 (12 кордов)",
+        present: true,
+        length: 50,
+        imageHeight: {
+            mobile: 193.9545440673828
+        }
+    },
+    {
+        id: 3,
+        src: cabel6,
+        name: "тросс 6",
+        description: "Стальной канат для лифта GRS 8X19S-NFC 1570",
+        present: true,
+        length: 50,
+        imageHeight: {
+            PC: 256,
+            mobile: 197.81817626953125
+        }
+    },
+    {
+        id: 4,
+        src: cabel1,
+        name: "тросс 1",
+        description: "Стальной канат для лифта GRS 9X21F(9Х17)-IWRC 1570",
+        present: true,
+        length: 50,
+        imageHeight: {
+            PC: 252
+        }
+    },
+    {
+        id: 5,
+        src: cabel4,
+        name: "тросс 4",
+        description: "Стальной канат для лифта GRS 8X19W-CWC 1570",
+        present: true,
+        length: 50,
+        imageHeight: {
+            PC: 242,
+            mobile: 202
+        }
+    },
+    {
+        id: 6,
+        src: belt8,
+        name: "ремень 8",
+        description: "Купить плоский тяговый ремень для лифта GRS AAA717AJ1(8 кордов)",
+        present: true,
+        length: 50,
+        imageHeight: {
+            PC: 314
+        }
+    }
 ];
 
-const GOODS_MOB = [
-    {id: 0, src: cabel1, name: "тросс 1", description: "Стальной канат для лифта GRS 9X21F(9Х17)-IWRC 1570", present: true, length: 50},
-    {id: 1, src: belt12, name: "ремень 12", description: "Плоский тяговый ремень для лифта GRS AAA717X1 (12 кордов)", present: true, length: 50},
-    {id: 2, src: cabel6, name: "тросс 6", description: "Стальной канат для лифта GRS 8X19S-NFC 1570", present: true, length: 50},
-    {id: 3, src: cabel4, name: "тросс 4", description: "Стальной канат для лифта GRS 9X21F(9Х17)-IWRC 1570", present: true, length: 50}
-];
 export function Catalog() {
-    const GOODS = (window.matchMedia('(min-width: 768px)').matches) ? GOODS_PC : GOODS_MOB;
 
+    let isMobile = window.innerWidth <= 767;
+    
     const goodsList = () => {
         return GOODS.map(product => `
-            <div class="${styles.good}">
+            <div class="${styles.good} ${product.id == 1 || product.id == 4 || product.id == 6 ? styles['only-PC'] : '' } ${product.id == 2 ? styles['only-mobile'] : ''}">
                 <div class="${styles.photo}">
-                    <img src="${product.src}" alt="${product.name}"/>
+                    <img src="${product.src}" alt="${product.name}" style="height: ${isMobile && product.imageHeight.mobile ? product.imageHeight.mobile : ( product.imageHeight.PC ? product.imageHeight.PC : 0)}px; ${product.id==6 ? 'position: relative; top: -72px;' : ''}"/>
                 </div>
-                <div class="${styles.description}">
-                    ${product.description}
+                <div class="${styles.info}">
+                    <div class="${styles.description}">
+                        ${product.description}
+                    </div>
+                    <div class="${styles.present}">
+                        <img src="${product.present ? present : absent}"/>
+                        <span>${product.present ? 'В наличии ' + product.length + ' м.' : 'Под заказ'}</span>
+                    </div>
+                    <button class="${styles['good-more']} ${styles['catalog-button']}">Подробнее</button>
                 </div>
-                <div class="${styles.present}">
-                    <img src="${product.present ? present : absent}"/>
-                    <span>${product.present ? 'В наличии '+product.length+' м.' : 'Под заказ'}</span>
-                </div>
-                <button class="${styles.more}">Подробнее</button>
             </div>
         `).join('')
     }
 
+    
+
+    function renderCatalog() {
+        document.querySelectorAll(`.${styles.catalog}`)[0].innerHTML = goodsList();
+    }
+
+    window.addEventListener('resize', () => {
+        const isStillMobile = window.innerWidth <= 767;
+        if (isStillMobile !== isMobile) {
+            isMobile = isStillMobile;
+            renderCatalog();
+        }
+    });
 
     return `
-    <div>
+    <div class="${styles.container}">
         <h1 class="${styles.header}">Рекомендуемое оборудование</h1>
         <div class="${styles.catalog}">
             ${goodsList()}
-            <button>Перейти в каталог</button>
         </div>
-
+        <button class="${styles['catalog-button']} ${styles['catalog-more']}">Перейти в каталог</button>
     </div>
   `
 }

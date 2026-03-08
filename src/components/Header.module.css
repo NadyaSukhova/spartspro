@@ -1,27 +1,90 @@
 .header {
-    display: flex;
-    flex-direction: row;
-    gap: 129px;
-    justify-content: center;
-    padding: 16px 0;
+  display: flex;
+  flex-direction: row;
+  gap: 129px;
+  justify-content: center;
+  padding: 16px 0;
+
 }
 
 .company-name {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .logo {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .first-letter {
-    margin-right: 3px;
+  margin-right: 3px;
 }
 
 .menu {
-    background-color: transparent;
+  display: none;
+}
+
+.menu-button {
+  background-color: transparent;
+  list-style: none;
+  outline: none;
+  border: none;
+  padding: 0;
+}
+
+.menu-button::-webkit-details-marker {
+    display: none;
+}
+
+.menu-button:focus{
     outline: none;
-    border: none;
-    padding: 0;
+}
+
+
+.link {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  text-transform: uppercase;
+  color: #272a33;
+  width: max-content;
+}
+
+.link:hover {
+  color: #ee753e;
+}
+
+@media (min-width: 768px) {
+  .header {
+    gap: 346px;
+  }
+}
+
+@media (min-width: 1160px) {
+  .header {
+    gap: 538px;
+  }
+}
+
+
+@media (min-width: 1440px) {
+  .header {
+    gap: 120px;
+  }
+  .menu {
+    display: flex;
+    flex-direction: row;
+    gap: 80px;
+  }
+  .menu-button {
+    display: none;
+  }
+}
+
+@media (min-width: 1920px) {
+  .header {
+    gap: 430px;
+  }
 }
