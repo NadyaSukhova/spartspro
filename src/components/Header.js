@@ -1,6 +1,6 @@
 import logo from "../assets/logo.png";
 import letterS from "../assets/letter-S.png";
-import otherLetters from "../assets/partspro.png";
+import otherLetters from "../../public/partspro.png";
 import menu from "../assets/menu.png";
 import close from "../assets/close.png";
 import styles from './Header.module.css';
