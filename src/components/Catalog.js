@@ -17,7 +17,7 @@ const GOODS = [
         length: 50,
         imageHeight: {
             PC: 260,
-            mobile: 200.90908813476562
+            mobile: 200.9
         }
     },
     {
@@ -39,7 +39,7 @@ const GOODS = [
         present: true,
         length: 50,
         imageHeight: {
-            mobile: 193.9545440673828
+            mobile: 194
         }
     },
     {
@@ -51,7 +51,7 @@ const GOODS = [
         length: 50,
         imageHeight: {
             PC: 256,
-            mobile: 197.81817626953125
+            mobile: 197.8
         }
     },
     {
@@ -96,7 +96,8 @@ export function Catalog() {
     
     const goodsList = () => {
         return GOODS.map(product => `
-            <div class="${styles.good} ${product.id == 1 || product.id == 4 || product.id == 6 ? styles['only-PC'] : '' } ${product.id == 2 ? styles['only-mobile'] : ''}">
+            <article  class="${styles.good} ${product.id == 1 || product.id == 4 || product.id == 6 ? styles['only-PC'] : '' } ${product.id == 2 ? styles['only-mobile'] : ''}">
+                <h2 class="visually-hidden">${product.name}</h2>
                 <div class="${styles.photo}">
                     <img src="${product.src}" alt="${product.name}" style="height: ${isMobile && product.imageHeight.mobile ? product.imageHeight.mobile : ( product.imageHeight.PC ? product.imageHeight.PC : 0)}px; ${product.id==6 ? 'position: relative; top: -72px;' : ''}"/>
                 </div>
@@ -110,14 +111,17 @@ export function Catalog() {
                     </div>
                     <button class="${styles['good-more']} ${styles['catalog-button']}">Подробнее</button>
                 </div>
-            </div>
+            </article>
         `).join('')
     }
 
     
 
     function renderCatalog() {
-        document.querySelectorAll(`.${styles.catalog}`)[0].innerHTML = goodsList();
+        const catalogElement = document.querySelector(`.${styles.catalog}`);
+        if (catalogElement) {
+            catalogElement.innerHTML = goodsList();
+        }
     }
 
     window.addEventListener('resize', () => {
@@ -129,12 +133,12 @@ export function Catalog() {
     });
 
     return `
-    <div class="${styles.container}">
-        <h1 class="${styles.header}">Рекомендуемое оборудование</h1>
-        <div class="${styles.catalog}">
+    <section class="${styles.container}" aria-labelledby="catalog-title">
+        <h1 id="catalog-title" class="${styles.header}">Рекомендуемое оборудование</h1>
+        <div class="${styles.catalog}" role="list">
             ${goodsList()}
         </div>
         <button class="${styles['catalog-button']} ${styles['catalog-more']}">Перейти в каталог</button>
-    </div>
+    </section>
   `
 }
