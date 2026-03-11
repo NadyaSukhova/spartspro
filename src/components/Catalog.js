@@ -97,7 +97,6 @@ export function Catalog() {
     const goodsList = () => {
         return GOODS.map(product => `
             <article  class="${styles.good} ${product.id == 1 || product.id == 4 || product.id == 6 ? styles['only-PC'] : '' } ${product.id == 2 ? styles['only-mobile'] : ''}">
-                <h2 class="visually-hidden">${product.name}</h2>
                 <div class="${styles.photo}">
                     <img src="${product.src}" alt="${product.name}" style="height: ${isMobile && product.imageHeight.mobile ? product.imageHeight.mobile : ( product.imageHeight.PC ? product.imageHeight.PC : 0)}px; ${product.id==6 ? 'position: relative; top: -72px;' : ''}"/>
                 </div>
